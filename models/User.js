@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
         minlength: 5,
     },
     lastname: {
-        type: String,
+        type: String, 
         maxlength: 50,
     },
     role: {
@@ -24,3 +24,6 @@ const userSchema = mongoose.Schema({
     }
 
 })
+
+const User = mongoose.model('User', userSchema)
+module.exports = { User } // 다른 파일에서도 해당 모델을 쓸 수 있도록 export
