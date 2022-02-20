@@ -6,6 +6,7 @@ const config = require('./config/key');
 const cookieParser = require('cookie-parser');
 
 const { User } = require("./models/User");
+const { auth } = require("./middleware/auth");
 
 // application/x-www-for-urlencoded 데이터 형식 가져오기
 app.use(bodyParser.urlencoded( {extended: true} ));
@@ -54,7 +55,7 @@ app.post('/api/users/login', (req, res) => {
       if(!isMatch){ 
         return res.json({
           loginSuccess: false,
-          message: "비밀번호가 틀렸습니다.",
+          message: "비밀번호가 틀렸습니다.", 
         })
       }
 
@@ -75,7 +76,21 @@ app.post('/api/users/login', (req, res) => {
   })
 })
 
+app.get('/api/users/auth', auth, (req, res) => {
 
+  // Authentication이 True일때, 미들웨어(auth)를 통과하고 해당 함수 실행
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role === 0 ? false:true,
+    isAuth: true,
+    email: req.user.email,
+    name: req.user.name,
+    lastname: req.user.lastname,
+    role: req.user.role,
+    image: req.user.image
+  })
+
+})
   
 
 app.listen(port, () => console.log(`Example app listenng on port ${port}!`));
