@@ -1,11 +1,11 @@
 const express = require('express'); //express 모듈 가져오기
 const app = express(); // 함수 생성
-const port = 3000;
+const port = 5000;
 const bodyParser = require('body-parser');
 const config = require('./config/key');
 const cookieParser = require('cookie-parser');
 
-const { User } = require("./models/User");
+const { User } = require("./models/User"); 
 const { auth } = require("./middleware/auth");
 
 // application/x-www-for-urlencoded 데이터 형식 가져오기
@@ -25,6 +25,10 @@ mongoose.connect(config.mongoURI,{
 
 
 app.get('/', (req, res) => res.send("Hello World~!"));
+
+app.get('/api/hello', (req, res) => {
+  res.send("안녕하세욥");
+})
 
 
 app.post('/api/users/register', (req, res) => {
