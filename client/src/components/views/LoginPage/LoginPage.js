@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux' 
-import { loginUser } from '../../../_actions/user_actions'
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../../../_actions/user_action'
 
 function LoginPage(props) {
 
     const dispatch = useDispatch();
+    const navigator = useNavigate();
     
     const [Email, setEmail] = useState("")
     const [Password, setPassword] = useState("")
@@ -28,10 +30,10 @@ function LoginPage(props) {
         dispatch(loginUser(body))
         .then(response => {
             if (response.payload.loginSuccess){
-                props.history.push('/')
+                navigator('/');
             }
             else{
-                alert('Error')
+                alert('Error');
             }
         })
 
@@ -41,7 +43,7 @@ function LoginPage(props) {
         <div style={{
             display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh'
         }}>
-            <form style={{display: 'flex', flexDirection:'column'}}
+            <form style={{ display: 'flex', flexDirection:'column' }}
                 onSubmit={onSubmitHandler}
             >
                 <label>Email</label>

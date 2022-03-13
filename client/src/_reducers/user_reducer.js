@@ -11,6 +11,5 @@ export default function (preState = {}, action){
 
         default:
             return preState;
-            break;
     }
 }
