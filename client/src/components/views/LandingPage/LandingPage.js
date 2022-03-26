@@ -30,7 +30,7 @@ function LandingPage() {
             display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh'
         }}>
             <h2>시작 페이지</h2>
-
+            <br />
             <button onClick={onClickHandler}>
                 로그아웃
             </button>
